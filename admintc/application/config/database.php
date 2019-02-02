@@ -76,16 +76,6 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 
-	// 'hostname' => 'localhost',
-	// 'username' => 'root',
-	// 'password' => 'root',
-	// 'database' => 'vavilatu_topcanperu',
-
-	// 'hostname' => 'mysql.hotelvictoriareggia.com',
-	// 'username' => 'topcanuser',
-	// 'password' => '1234567890',
-	// 'database' => 'topcandata',
-
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '123456',

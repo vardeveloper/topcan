@@ -3,8 +3,10 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Inicio_Model extends CI_Model
+class Producto_model extends CI_Model
 {
+
+    protected $table = "producto";
 
     public function __construct()
     {
@@ -37,6 +39,21 @@ class Inicio_Model extends CI_Model
     public function get_total()
     {
         return $this->db->count_all("producto");
+    }
+
+    public function getPageNovedades()
+    {
+        $query = $this->db->query("SELECT * FROM producto ORDER BY cod_producto DESC LIMIT 12");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+
+            return $data;
+        }
+
+        return false;
     }
 
 }

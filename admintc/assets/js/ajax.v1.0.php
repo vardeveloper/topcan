@@ -81,32 +81,28 @@ if ($this->session->flashdata('msg') != '') {
                 })
     })
 
-    $('#form-product').submit(function (e) {
-    
-        //var formData = new FormData(document.getElementById("form-product"));
-        var formData = new FormData(this);
-        //var data = $(this).serialize();
-        console.log(formData);
+    $('#form-tambah-pegawai').submit(function (e) {
+        var data = $(this).serialize();
 
         $.ajax({
             method: 'POST',
-            url: '<?php echo base_url('Productos/create'); ?>',
-            data: formData,
-            processData: false,
-            contentType: false,
-        }).done(function (data) {
-            var out = jQuery.parseJSON(data);
-            tampilPegawai();
-            if (out.status == 'form') {
-                $('.form-msg').html(out.msg);
-                effect_msg_form();
-            } else {
-                document.getElementById("form-product").reset();
-                $('#product').modal('hide');
-                $('.msg').html(out.msg);
-                effect_msg();
-            }
+            url: '<?php echo base_url('Pegawai/prosesTambah'); ?>',
+            data: data
         })
+                .done(function (data) {
+                    var out = jQuery.parseJSON(data);
+
+                    tampilPegawai();
+                    if (out.status == 'form') {
+                        $('.form-msg').html(out.msg);
+                        effect_msg_form();
+                    } else {
+                        document.getElementById("form-tambah-pegawai").reset();
+                        $('#tambah-pegawai').modal('hide');
+                        $('.msg').html(out.msg);
+                        effect_msg();
+                    }
+                })
 
         e.preventDefault();
     });
@@ -137,7 +133,7 @@ if ($this->session->flashdata('msg') != '') {
         e.preventDefault();
     });
 
-    $('#product').on('hidden.bs.modal', function () {
+    $('#tambah-pegawai').on('hidden.bs.modal', function () {
         $('.form-msg').html('');
     })
 
@@ -394,7 +390,7 @@ if ($this->session->flashdata('msg') != '') {
     $('#update-posisi').on('hidden.bs.modal', function () {
         $('.form-msg').html('');
     })
-
-
-
+    
+    
+    
 </script>

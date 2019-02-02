@@ -53,10 +53,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // $route['404_override'] = '';
 // $route['translate_uri_dashes'] = FALSE;
 
-$route['default_controller'] = 'inicio';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
-$route['categoria/index']             = 'categoria';
+$route['default_controller']        = 'inicio';
+$route['404_override']              = '';
+$route['translate_uri_dashes']      = FALSE;
+$route['categoria/index']           = 'categoria';
 // $route['habitaciones/habitacion-simple']             = 'habitaciones/habitacion_simple';
 // $route['habitaciones/habitacion-ejecutiva']          = 'habitaciones/habitacion_ejecutiva';
 // $route['habitaciones/habitacion-doble']              = 'habitaciones/habitacion_doble';

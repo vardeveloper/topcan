@@ -1,7 +1,11 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-class Categoria_Model extends CI_Model {
-    
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class Categoria_Model extends CI_Model
+{
+
     public function __construct()
     {
         parent::__construct();
@@ -14,62 +18,97 @@ class Categoria_Model extends CI_Model {
         return $arrayCategorias;
     }
 
-    public function getMarcas(){
+    public function getMarcas()
+    {
         $this->db->select('*')->from('categoria')->where('cod_tip_categoria', '1');
-        $arrayMarcas =  $this->db->get()->result();
+        $arrayMarcas = $this->db->get()->result();
         return $arrayMarcas;
     }
 
-    public function getColor(){
+    public function getColor()
+    {
         $this->db->select('*')->from('categoria')->where('cod_tip_categoria', '2');
-        $arrayColores =  $this->db->get()->result();
+        $arrayColores = $this->db->get()->result();
         return $arrayColores;
     }
 
-    public function getEstacion(){
+    public function getEstacion()
+    {
         $this->db->select('*')->from('categoria')->where('cod_tip_categoria', '3');
-        $arrayEstaciones =  $this->db->get()->result();
+        $arrayEstaciones = $this->db->get()->result();
         return $arrayEstaciones;
     }
 
-    public function getDisfraz(){
+    public function getDisfraz()
+    {
         $this->db->select('*')->from('categoria')->where('cod_tip_categoria', '4');
-        $arrayDisfraces =  $this->db->get()->result();
+        $arrayDisfraces = $this->db->get()->result();
         return $arrayDisfraces;
     }
 
-    public function getMaterial(){
+    public function getMaterial()
+    {
         $this->db->select('*')->from('categoria')->where('cod_tip_categoria', '5');
-        $arrayMateriales =  $this->db->get()->result();
+        $arrayMateriales = $this->db->get()->result();
         return $arrayMateriales;
     }
 
-    public function getAccesorio(){
+    public function getAccesorio()
+    {
         $this->db->select('*')->from('categoria')->where('cod_tip_categoria', '6');
-        $arrayAccesorios =  $this->db->get()->result();
+        $arrayAccesorios = $this->db->get()->result();
         return $arrayAccesorios;
     }
 
-    public function getArticuloId($noticiaId){
-        $this->db->select('*')
-        ->from('producto p')
-        ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto' )
-        ->where('pc.cod_categoria', $noticiaId);
-
-        $noticiaDetalle =  $this->db->get()->result();
-        //print_r($noticiaDetalle);
-        return $noticiaDetalle;
+    public function getCategories()
+    {
+        $this->db->select('*')->from('categoria');
+        $arrayAccesorios = $this->db->get()->result();
+        return $arrayAccesorios;
     }
-    
-    public function getArticuloMarca($noticiaId){
-        $this->db->select('*')
-        ->from('producto p')
-        ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto' )
-        ->where('pc.cod_categoria', $noticiaId);
 
-        $arrayArticulosMarca =  $this->db->get()->result();
-        //print_r($arrayArticulosMarca);
-        return $arrayArticulosMarca;
+    public function getTypeCategories()
+    {
+        $this->db->select('*')->from('tipo_categoria');
+        $arrayAccesorios = $this->db->get()->result();
+        return $arrayAccesorios;
+    }
+
+    public function getProductosByCategoria($id)
+    {
+        $this->db->select('*')
+                ->from('producto p')
+                ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto')
+                ->where('pc.cod_categoria', $id);
+        $rows = $this->db->get()->result();
+//        echo "<pre>";
+//        print_r($rows);
+//        echo "</pre>";
+        return $rows;
+    }
+
+    public function getProductosByTipoCategoria($where = null)
+    {
+        $this->db->select('*')
+                ->from('producto p')
+                ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto')
+                ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria')
+                //->join('tipo_categoria tc', 'ca.cod_tip_categoria = tc.cod_tip_categoria')
+                ->group_by('pc.cod_producto');
+
+        if (isset($where['typeCategoryId']) && $where['typeCategoryId'] > 0) {
+            $this->db->where('ca.cod_tip_categoria', $where['typeCategoryId']);
+        }
+
+        if (isset($where['categoryId']) && $where['categoryId'] > 0) {
+            $this->db->where('ca.cod_categoria', $where['categoryId']);
+        }
+
+        $rows = $this->db->get()->result();
+
+        //echo $sql = $this->db->last_query();
+
+        return $rows;
     }
 
 }

@@ -1,7 +1,9 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Detalle extends CI_Controller {
+class Detalle extends CI_Controller
+{
 
     public function __construct()
     {
@@ -28,5 +30,5 @@ class Detalle extends CI_Controller {
 
         $this->load->view('layout/layout', $data);
     }
-    
+
 }
