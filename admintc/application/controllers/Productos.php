@@ -9,6 +9,7 @@ class Productos extends AUTH_Controller
     {
         parent::__construct();
         $this->load->model('M_productos');
+        $this->load->model('M_categorias');
         $this->load->helper('file');
     }
 
@@ -20,7 +21,7 @@ class Productos extends AUTH_Controller
         $data['page'] = "productos";
         $data['judul'] = "Datos productos";
         $data['deskripsi'] = "Administrar Datos Productos";
-
+        
         $data['modal_product_create'] = show_my_modal('modals/modal_product_create', 'product', $data);
 
         $this->template->views('product/home', $data);
@@ -28,8 +29,8 @@ class Productos extends AUTH_Controller
 
     public function tampil()
     {
-        $data['dataPegawai'] = $this->M_productos->select_all();
-        $this->load->view('pegawai/list_data', $data);
+        $data['products'] = $this->M_productos->select_all();
+        $this->load->view('product/list_data', $data);
     }
 
     public function create()
@@ -127,24 +128,73 @@ class Productos extends AUTH_Controller
     {
         $id = trim($_POST['id']);
 
-        $data['dataPegawai'] = $this->M_pegawai->select_by_id($id);
-        $data['dataPosisi'] = $this->M_posisi->select_all();
-        $data['dataKota'] = $this->M_kota->select_all();
+        $data['producto'] = $this->M_productos->select_by_id($id);
+        //$data['dataPosisi'] = $this->M_posisi->select_all();
+        //$data['dataKota'] = $this->M_kota->select_all();
         $data['userdata'] = $this->userdata;
 
-        echo show_my_modal('modals/modal_update_pegawai', 'update-pegawai', $data);
+        echo show_my_modal('modals/modal_product_update', 'update-product', $data);
+    }
+
+    public function relationCategory()
+    {
+        $id = trim($_POST['id']);
+
+        $data['producto'] = $this->M_productos->select_by_id($id);
+        $data['categories'] = $this->treeOfCategories($id);
+        $data['userdata'] = $this->userdata;
+        
+//        echo "<pre>";
+//        print_r($data);
+//        echo "</pre>";
+
+        echo show_my_modal('modals/modal_product_categories', 'update-productCategories', $data);
     }
 
     public function prosesUpdate()
     {
-        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-        $this->form_validation->set_rules('kota', 'Kota', 'trim|required');
-        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'trim|required');
-        $this->form_validation->set_rules('posisi', 'Posisi', 'trim|required');
+        $this->form_validation->set_rules('description', 'Descripcion', 'trim|required');
+        $this->form_validation->set_rules('detail', 'Detalle', 'trim|required');
 
         $data = $this->input->post();
         if ($this->form_validation->run() == TRUE) {
-            $result = $this->M_pegawai->update($data);
+            
+
+            // Imagen
+            $valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp'); 
+            $path = ASSETS_PATH . '/img/galeria/'; // upload directory
+
+            if ($_FILES['file']) {
+                
+                $product = $this->M_productos->select_by_id($data['id']);
+                $imagen_path = dirname(ASSETS_PATH) . '/' . $product->img1_producto;
+                
+                if (file_exists($imagen_path)) {
+                    unlink($imagen_path);
+                }
+                
+                $img = $_FILES['file']['name'];
+                $tmp = $_FILES['file']['tmp_name'];
+
+                // get uploaded file's extension
+                $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+
+                // can upload same image using rand function
+                $final_image = rand(1000,1000000) . $img;
+                $filename = strtolower($final_image);
+
+                // check's valid format
+                if(in_array($ext, $valid_extensions)) 
+                {
+                    $path = $path . $filename; 
+                    move_uploaded_file($tmp,$path);
+                }
+            }
+            
+            $data['img1'] = "assets/img/galeria/$filename";
+            //------------------------------------------------------------------
+            
+            $result = $this->M_productos->update($data);
 
             if ($result > 0) {
                 $out['status'] = '';
@@ -161,16 +211,61 @@ class Productos extends AUTH_Controller
         echo json_encode($out);
     }
 
+    public function updateCategories()
+    {
+        $data = $this->input->post();
+
+        $result = $this->M_productos->updateCategories($data);
+
+        if ($result) {
+            $out['status'] = '';
+            $out['msg'] = show_succ_msg('Datos guardados exitosamente', '18px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_succ_msg('Error al actualizar los datos', '18px');
+        }
+
+        echo json_encode($out);
+    }
+
     public function delete()
     {
         $id = $_POST['id'];
-        $result = $this->M_pegawai->delete($id);
+        $result = $this->M_productos->delete($id);
 
         if ($result > 0) {
-            echo show_succ_msg('Data Pegawai Berhasil dihapus', '18px');
+            echo show_succ_msg('Se elimino el registro correctamente', '18px');
         } else {
-            echo show_err_msg('Data Pegawai Gagal dihapus', '18px');
+            echo show_err_msg('Hubo un error, intete mas tarde', '18px');
         }
+    }
+    
+    public function treeOfCategories($id)
+    {
+        //$categories = $this->M_categorias->getCategories();
+        $categories = $this->M_categorias->getCategoriesByProductId($id);
+        $types = $this->M_categorias->getTypeCategories();
+        $treeOfCategories = array();
+
+//        echo "<pre>";
+//        print_r($categories);
+//        echo "</pre>";
+        
+        foreach ($types as $type) {
+            $treeOfCategories[$type->cod_tip_categoria] = array();
+            $treeOfCategories[$type->cod_tip_categoria]['name'] = $type->des_tip_categoria;
+            $treeOfCategories[$type->cod_tip_categoria]['subcategories'] = array();
+        }
+        
+        foreach ($categories as $category) {
+            $typeId = $category->cod_tip_categoria;
+            $categoryId = $category->cod_categoria;
+            $treeOfCategories[$typeId]['subcategories'][$categoryId] = array();
+            $treeOfCategories[$typeId]['subcategories'][$categoryId]['name'] = $category->des_categoria;
+            $treeOfCategories[$typeId]['subcategories'][$categoryId]['product_id'] = $category->cod_producto;
+        }
+        
+        return $treeOfCategories;
     }
 
     /*
@@ -276,6 +371,3 @@ class Productos extends AUTH_Controller
       }
      */
 }
-
-/* End of file Pegawai.php */
-/* Location: ./application/controllers/Pegawai.php */

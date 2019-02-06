@@ -42,43 +42,43 @@ if ($this->session->flashdata('msg') != '') {
     function tampilPegawai() {
         $.get('<?php echo base_url('Productos/tampil'); ?>', function (data) {
             MyTable.fnDestroy();
-            $('#data-pegawai').html(data);
+            $('#data-product').html(data);
             refresh();
         });
     }
 
-    var id_pegawai;
-    $(document).on("click", ".konfirmasiHapus-pegawai", function () {
-        id_pegawai = $(this).attr("data-id");
+    // product delete
+    var product_id;
+    $(document).on("click", ".product-delete-pegawai", function () {
+        product_id = $(this).attr("data-id");
     })
     $(document).on("click", ".hapus-dataPegawai", function () {
-        var id = id_pegawai;
+        var id = product_id;
 
         $.ajax({
             method: "POST",
-            url: "<?php echo base_url('Pegawai/delete'); ?>",
+            url: "<?php echo base_url('Productos/delete'); ?>",
             data: "id=" + id
+        }).done(function (data) {
+            $('#product-delete').modal('hide');
+            tampilPegawai();
+            $('.msg').html(data);
+            effect_msg();
         })
-                .done(function (data) {
-                    $('#konfirmasiHapus').modal('hide');
-                    tampilPegawai();
-                    $('.msg').html(data);
-                    effect_msg();
-                })
     })
 
-    $(document).on("click", ".update-dataPegawai", function () {
+    // product update open modal
+    $(document).on("click", ".update-dataProduct", function () {
         var id = $(this).attr("data-id");
 
         $.ajax({
             method: "POST",
-            url: "<?php echo base_url('Pegawai/update'); ?>",
-            data: "id=" + id
+            url: "<?php echo base_url('Productos/update'); ?>",
+            data: "id=" + id,
+        }).done(function (data) {
+            $('#tempat-modal').html(data);
+            $('#update-product').modal('show');
         })
-                .done(function (data) {
-                    $('#tempat-modal').html(data);
-                    $('#update-pegawai').modal('show');
-                })
     })
 
     $('#form-product').submit(function (e) {
@@ -111,28 +111,32 @@ if ($this->session->flashdata('msg') != '') {
         e.preventDefault();
     });
 
-    $(document).on('submit', '#form-update-pegawai', function (e) {
-        var data = $(this).serialize();
+    // product update save
+    $(document).on('submit', '#form-update-product', function (e) {
+        //var data = $(this).serialize();
+        var data = new FormData(this);
 
         $.ajax({
             method: 'POST',
-            url: '<?php echo base_url('Pegawai/prosesUpdate'); ?>',
-            data: data
+            url: '<?php echo base_url('Productos/prosesUpdate'); ?>',
+            data: data,
+            processData: false,
+            contentType: false,
         })
-                .done(function (data) {
-                    var out = jQuery.parseJSON(data);
+        .done(function (data) {
+            var out = jQuery.parseJSON(data);
 
-                    tampilPegawai();
-                    if (out.status == 'form') {
-                        $('.form-msg').html(out.msg);
-                        effect_msg_form();
-                    } else {
-                        document.getElementById("form-update-pegawai").reset();
-                        $('#update-pegawai').modal('hide');
-                        $('.msg').html(out.msg);
-                        effect_msg();
-                    }
-                })
+            tampilPegawai();
+            if (out.status == 'form') {
+                $('.form-msg').html(out.msg);
+                effect_msg_form();
+            } else {
+                document.getElementById("form-update-product").reset();
+                $('#update-product').modal('hide');
+                $('.msg').html(out.msg);
+                effect_msg();
+            }
+        })
 
         e.preventDefault();
     });
@@ -141,7 +145,7 @@ if ($this->session->flashdata('msg') != '') {
         $('.form-msg').html('');
     })
 
-    $('#update-pegawai').on('hidden.bs.modal', function () {
+    $('#update-product').on('hidden.bs.modal', function () {
         $('.form-msg').html('');
     })
 
@@ -396,5 +400,49 @@ if ($this->session->flashdata('msg') != '') {
     })
 
 
+
+    // product categories update open modal
+    $(document).on("click", ".update-dataCategories", function () {
+        var id = $(this).attr("data-id");
+        $.ajax({
+            method: "POST",
+            url: "<?php echo base_url('Productos/relationCategory'); ?>",
+            data: "id=" + id,
+        }).done(function (data) {
+            $('#tempat-modal').html(data);
+            $('#update-productCategories').modal('show');
+        })
+    })
+    
+    // product update save
+    $(document).on('submit', '#form-update-productCategory', function (e) {
+        var data = $(this).serialize();
+
+        $.ajax({
+            method: 'POST',
+            url: '<?php echo base_url('Productos/updateCategories'); ?>',
+            data: data,
+        })
+        .done(function (data) {
+            var out = jQuery.parseJSON(data);
+
+            tampilPegawai();
+            if (out.status == 'form') {
+                $('.form-msg').html(out.msg);
+                effect_msg_form();
+            } else {
+                document.getElementById("form-update-productCategory").reset();
+                $('#update-productCategories').modal('hide');
+                $('.msg').html(out.msg);
+                effect_msg();
+            }
+        })
+
+        e.preventDefault();
+    });
+    
+    $('#update-productCategories').on('hidden.bs.modal', function () {
+        $('.form-msg').html('');
+    })
 
 </script>

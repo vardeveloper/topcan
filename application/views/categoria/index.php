@@ -115,13 +115,16 @@
 
                                             <?php endforeach ?>
 
-                                            <div class="navigation-wrap">
+                                            <!--div class="navigation-wrap">
                                                 <nav role="navigation" class="navigation pagination">
-                                                    <span class='page-numbers current'>1</span>
-                                                    <a class='page-numbers' href='#'>2</a>
+                                                    <a class="next page-numbers" href="#">Anterior</a>
+                                                    <a class="page-numbers" href="#">1</a>
+                                                    <span class="page-numbers current">2</span>
+                                                    <a class="page-numbers" href="#">3</a>
                                                     <a class="next page-numbers" href="#">Siguiente</a>
                                                 </nav>
-                                            </div>
+                                            </div-->
+                                            
                                         </div>
 
                                         <!--

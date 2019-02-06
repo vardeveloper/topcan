@@ -26,46 +26,43 @@ class M_productos extends CI_Model
 
     public function select_by_id($id)
     {
-        $sql = "SELECT pegawai.id AS id_pegawai, pegawai.nama AS nama_pegawai, pegawai.id_kota, pegawai.id_kelamin, pegawai.id_posisi, pegawai.telp AS telp, kota.nama AS kota, kelamin.nama AS kelamin, posisi.nama AS posisi FROM pegawai, kota, kelamin, posisi WHERE pegawai.id_kota = kota.id AND pegawai.id_kelamin = kelamin.id AND pegawai.id_posisi = posisi.id AND pegawai.id = '{$id}'";
-
+        $sql = "SELECT * FROM producto WHERE cod_producto = '{$id}'";
         $data = $this->db->query($sql);
-
-        return $data->row();
-    }
-
-    public function select_by_posisi($id)
-    {
-        $sql = "SELECT COUNT(*) AS jml FROM pegawai WHERE id_posisi = {$id}";
-
-        $data = $this->db->query($sql);
-
-        return $data->row();
-    }
-
-    public function select_by_kota($id)
-    {
-        $sql = "SELECT COUNT(*) AS jml FROM pegawai WHERE id_kota = {$id}";
-
-        $data = $this->db->query($sql);
-
         return $data->row();
     }
 
     public function update($data)
     {
-        $sql = "UPDATE pegawai SET nama='" . $data['nama'] . "', telp='" . $data['telp'] . "', id_kota=" . $data['kota'] . ", id_kelamin=" . $data['jk'] . ", id_posisi=" . $data['posisi'] . " WHERE id='" . $data['id'] . "'";
-
+        $sql = "UPDATE producto SET "
+                . "des_producto='" . $data['description'] . "', "
+                . "det_producto='" . $data['detail'] . "', "
+                . "img1_producto='" . $data['img1'] . "' "
+                . "WHERE cod_producto=" . $data['id'];
         $this->db->query($sql);
-
         return $this->db->affected_rows();
+    }
+
+    public function updateCategories($data)
+    {
+        $this->db->delete('producto_categoria', array('cod_producto' => $data['id']));
+        foreach($data['category'] as $key => $value)
+        {
+            $productCategory = array(
+                'cod_categoria' => $value,
+                'cod_producto' => $data['id'],
+            );
+            $result = $this->db->insert('producto_categoria', $productCategory);
+            if (empty($result)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public function delete($id)
     {
-        $sql = "DELETE FROM pegawai WHERE id='" . $id . "'";
-
+        $sql = "DELETE FROM producto WHERE cod_producto='" . $id . "'";
         $this->db->query($sql);
-
         return $this->db->affected_rows();
     }
 
@@ -79,27 +76,21 @@ class M_productos extends CI_Model
 
     public function insert_batch($data)
     {
-        $this->db->insert_batch('pegawai', $data);
-
+        $this->db->insert_batch('producto', $data);
         return $this->db->affected_rows();
     }
 
     public function check_nama($nama)
     {
-        $this->db->where('nama', $nama);
-        $data = $this->db->get('pegawai');
-
+        $this->db->where('name', $nama);
+        $data = $this->db->get('producto');
         return $data->num_rows();
     }
 
     public function total_rows()
     {
-        $data = $this->db->get('pegawai');
-
+        $data = $this->db->get('producto');
         return $data->num_rows();
     }
 
 }
-
-/* End of file M_pegawai.php */
-/* Location: ./application/models/M_pegawai.php */

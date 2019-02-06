@@ -49,26 +49,26 @@ class Inicio extends CI_Controller
             // styling/html stuff
             $config['full_tag_open'] = '<ul class="pagination">';
             $config['full_tag_close'] = '</ul>';
-
+            // primero
             $config['first_link'] = '&laquo; Primero';
             $config['first_tag_open'] = '<li class="prev page">';
             $config['first_tag_close'] = '</li>' . "\n";
-
+            // ultimo
             $config['last_link'] = 'Último &raquo;';
             $config['last_tag_open'] = '<li class="next page">';
             $config['last_tag_close'] = '</li>' . "\n";
-
+            // siguiente
             $config['next_link'] = 'Siguiente &rarr;';
             $config['next_tag_open'] = '<li class="next page">';
             $config['next_tag_close'] = '</li>' . "\n";
-
+            // anterior
             $config['prev_link'] = '&larr; Anterior';
             $config['prev_tag_open'] = '<li class="prev page">';
             $config['prev_tag_close'] = '</li>' . "\n";
-
+            // activo
             $config['cur_tag_open'] = '<li class="active"><a href="">';
             $config['cur_tag_close'] = '</a></li>';
-
+            // page
             $config['num_tag_open'] = '<li class="page">';
             $config['num_tag_close'] = '</li>' . "\n";
 

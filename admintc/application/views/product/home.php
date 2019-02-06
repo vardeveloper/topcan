@@ -21,8 +21,7 @@
                     <th style="text-align: center;">Acción</th>
                 </tr>
             </thead>
-            <tbody id="data-pegawai">
-
+            <tbody id="data-product">
             </tbody>
         </table>
     </div>
@@ -32,7 +31,8 @@
 
 <div id="tempat-modal"></div>
 
-<?php show_my_confirm('konfirmasiHapus', 'hapus-dataPegawai', 'Estás seguro de eliminar?', 'SI, Estoy seguro'); ?>
+<?php show_my_confirm('product-delete', 'hapus-dataPegawai', 'Estás seguro de eliminar?', 'SI, Estoy seguro'); ?>
+
 <?php
 $data['judul'] = 'Pegawai';
 $data['url'] = 'Pegawai/import';

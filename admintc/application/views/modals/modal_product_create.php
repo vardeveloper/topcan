@@ -14,7 +14,7 @@
             <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
             </span>
-            <textarea name="description" rows="5" placeholder="descripcion" class="form-control"></textarea>
+            <input type="text" class="form-control" placeholder="descripcion" name="description">
         </div>
         <div class="input-group form-group">
             <span class="input-group-addon">

@@ -86,8 +86,20 @@
                                             </div>
                                         </div>
                                         <?php endforeach ?>
+                                        
                                     </div>
-                                    <div>
+
+                                    <!--div class="navigation-wrap">
+                                        <nav role="navigation" class="navigation pagination">
+                                            <a class="next page-numbers" href="#">Anterior</a>
+                                            <a class="page-numbers" href="#">1</a>
+                                            <span class="page-numbers current">2</span>
+                                            <a class="page-numbers" href="#">3</a>
+                                            <a class="next page-numbers" href="#">Siguiente</a>
+                                        </nav>
+                                    </div-->
+                                    
+                                    <div class="row-fluid">
                                         <?php if (isset($links)) { ?>
                                             <?php echo $links ?>
                                         <?php } ?>
