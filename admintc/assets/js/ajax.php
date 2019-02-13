@@ -167,7 +167,7 @@ if ($this->session->flashdata('msg') != '') {
 
         $.ajax({
             method: "POST",
-            url: "<?php echo base_url('Kota/delete'); ?>",
+            url: "<?php echo base_url('Categorias/delete'); ?>",
             data: "id=" + id
         })
                 .done(function (data) {
@@ -219,7 +219,7 @@ if ($this->session->flashdata('msg') != '') {
 
         $.ajax({
             method: 'POST',
-            url: '<?php echo base_url('Kota/prosesTambah'); ?>',
+            url: '<?php echo base_url('Categorias/prosesTambah'); ?>',
             data: data
         })
                 .done(function (data) {
@@ -245,7 +245,7 @@ if ($this->session->flashdata('msg') != '') {
 
         $.ajax({
             method: 'POST',
-            url: '<?php echo base_url('Kota/prosesUpdate'); ?>',
+            url: '<?php echo base_url('Categorias/prosesUpdate'); ?>',
             data: data
         })
                 .done(function (data) {

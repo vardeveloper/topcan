@@ -1,192 +1,209 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Categorias extends AUTH_Controller {
-	public function __construct() {
-		parent::__construct();
-		//$this->load->model('M_kota');
-		$this->load->model('M_categorias');
-	}
+class Categorias extends AUTH_Controller
+{
 
-	public function index() {
-		$data['userdata'] 	= $this->userdata;
-		$data['dataKota'] 	= $this->M_categorias->select_all();
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('M_tipocategoria');
+        $this->load->model('M_categorias');
+    }
 
-		$data['page'] 		= "categorias";
-		$data['judul'] 		= "Datos Categorias";
-		$data['deskripsi'] 	= "Administrar Datos Categorias";
+    public function index()
+    {
+        $data['userdata'] = $this->userdata;
+        $data['dataKota'] = $this->M_categorias->select_all();
+        $data['dataTypeCategory'] = $this->M_tipocategoria->select_all();
 
-		$data['modal_tambah_kota'] = show_my_modal('modals/modal_tambah_kota', 'tambah-kota', $data);
+        $data['page'] = "categorias";
+        $data['judul'] = "Datos Categorias";
+        $data['deskripsi'] = "Administrar Datos Categorias";
 
-		$this->template->views('kota/home', $data);
-	}
+        $data['modal_tambah_kota'] = show_my_modal('modals/modal_tambah_kota', 'tambah-kota', $data);
 
-	public function tampil() {
-		$data['dataKota'] = $this->M_categorias->select_all();
-		$this->load->view('kota/list_data', $data);
-	}
+        $this->template->views('kota/home', $data);
+    }
 
-	public function prosesTambah() {
-		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
+    public function tampil()
+    {
+        $data['dataKota'] = $this->M_categorias->select_all();
+        $this->load->view('kota/list_data', $data);
+    }
 
-		$data 	= $this->input->post();
-		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_kota->insert($data);
+    public function prosesTambah()
+    {
+        $this->form_validation->set_rules('typeCategory', 'Tipo Categoría', 'required');
+        $this->form_validation->set_rules('name', 'Nombre', 'trim|required');
+        $this->form_validation->set_rules('description', 'Descripción', 'trim|required');
 
-			if ($result > 0) {
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Datos guardados exitosamente', '18px');
-			} else {
-				$out['status'] = '';
-				$out['msg'] = show_err_msg('Error al actualizar los datos', '18px');
-			}
-		} else {
-			$out['status'] = 'form';
-			$out['msg'] = show_err_msg(validation_errors());
-		}
+        $data = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $result = $this->M_categorias->insert($data);
 
-		echo json_encode($out);
-	}
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('Datos guardados exitosamente', '18px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_err_msg('Error al actualizar los datos', '18px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
 
-	public function update() {
-		$data['userdata'] 	= $this->userdata;
+        echo json_encode($out);
+    }
 
-		$id 				= trim($_POST['id']);
-		$data['dataKota'] 	= $this->M_categorias->select_by_id($id);
+    public function update()
+    {
+        $data['userdata'] = $this->userdata;
+        $data['dataTypeCategory'] = $this->M_tipocategoria->select_all();
 
-		echo show_my_modal('modals/modal_update_kota', 'update-kota', $data);
-	}
+        $id = trim($_POST['id']);
+        $data['dataKota'] = $this->M_categorias->select_by_id($id);
 
-	public function prosesUpdate() {
-		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
+        echo show_my_modal('modals/modal_update_kota', 'update-kota', $data);
+    }
 
-		$data 	= $this->input->post();
-		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_kota->update($data);
+    public function prosesUpdate()
+    {
+        $this->form_validation->set_rules('typeCategory', 'Tipo Categoría', 'required');
+        $this->form_validation->set_rules('name', 'Nombre', 'trim|required');
+        $this->form_validation->set_rules('description', 'Descripción', 'trim|required');
 
-			if ($result > 0) {
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Datos guardados exitosamente', '18px');
-			} else {
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Error al actualizar los datos', '18px');
-			}
-		} else {
-			$out['status'] = 'form';
-			$out['msg'] = show_err_msg(validation_errors());
-		}
+        $data = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $result = $this->M_categorias->update($data);
 
-		echo json_encode($out);
-	}
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('Datos guardados exitosamente', '18px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('Error al actualizar los datos', '18px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
 
-	public function delete() {
-		$id = $_POST['id'];
-		$result = $this->M_kota->delete($id);
-		
-		if ($result > 0) {
-			echo show_succ_msg('Data Kota Berhasil dihapus', '18px');
-		} else {
-			echo show_err_msg('Data Kota Gagal dihapus', '18px');
-		}
-	}
+        echo json_encode($out);
+    }
 
-	public function detail() {
-		$data['userdata'] 	= $this->userdata;
+    public function delete()
+    {
+        $id = $_POST['id'];
+        $result = $this->M_categorias->delete($id);
 
-		$id 				= trim($_POST['id']);
-		$data['kota'] = $this->M_kota->select_by_id($id);
-		$data['jumlahKota'] = $this->M_kota->total_rows();
-		$data['dataKota'] = $this->M_kota->select_by_pegawai($id);
+        if ($result > 0) {
+            echo show_succ_msg('Data Kota Berhasil dihapus', '18px');
+        } else {
+            echo show_err_msg('Data Kota Gagal dihapus', '18px');
+        }
+    }
 
-		echo show_my_modal('modals/modal_detail_kota', 'detail-kota', $data, 'lg');
-	}
+    public function detail()
+    {
+        $data['userdata'] = $this->userdata;
 
-	/*
-	public function export() {
-		error_reporting(E_ALL);
-    
-		include_once './assets/phpexcel/Classes/PHPExcel.php';
-		$objPHPExcel = new PHPExcel();
+        $id = trim($_POST['id']);
+        $data['kota'] = $this->M_kota->select_by_id($id);
+        $data['jumlahKota'] = $this->M_kota->total_rows();
+        $data['dataKota'] = $this->M_kota->select_by_pegawai($id);
 
-		$data = $this->M_kota->select_all();
+        echo show_my_modal('modals/modal_detail_kota', 'detail-kota', $data, 'lg');
+    }
 
-		$objPHPExcel = new PHPExcel(); 
-		$objPHPExcel->setActiveSheetIndex(0); 
+    /*
+      public function export() {
+      error_reporting(E_ALL);
 
-		$objPHPExcel->getActiveSheet()->SetCellValue('A1', "ID"); 
-		$objPHPExcel->getActiveSheet()->SetCellValue('B1', "Nama Kota");
+      include_once './assets/phpexcel/Classes/PHPExcel.php';
+      $objPHPExcel = new PHPExcel();
 
-		$rowCount = 2;
-		foreach($data as $value){
-		    $objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, $value->id); 
-		    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, $value->nama); 
-		    $rowCount++; 
-		} 
+      $data = $this->M_kota->select_all();
 
-		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
-		$objWriter->save('./assets/excel/Data Kota.xlsx'); 
+      $objPHPExcel = new PHPExcel();
+      $objPHPExcel->setActiveSheetIndex(0);
 
-		$this->load->helper('download');
-		force_download('./assets/excel/Data Kota.xlsx', NULL);
-	}
-	*/
+      $objPHPExcel->getActiveSheet()->SetCellValue('A1', "ID");
+      $objPHPExcel->getActiveSheet()->SetCellValue('B1', "Nama Kota");
 
-	/*
-	public function import() {
-		$this->form_validation->set_rules('excel', 'File', 'trim|required');
+      $rowCount = 2;
+      foreach($data as $value){
+      $objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, $value->id);
+      $objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, $value->nama);
+      $rowCount++;
+      }
 
-		if ($_FILES['excel']['name'] == '') {
-			$this->session->set_flashdata('msg', 'File harus diisi');
-		} else {
-			$config['upload_path'] = './assets/excel/';
-			$config['allowed_types'] = 'xls|xlsx';
-			
-			$this->load->library('upload', $config);
-			
-			if ( ! $this->upload->do_upload('excel')){
-				$error = array('error' => $this->upload->display_errors());
-			}
-			else{
-				$data = $this->upload->data();
-				
-				error_reporting(E_ALL);
-				date_default_timezone_set('Asia/Jakarta');
+      $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+      $objWriter->save('./assets/excel/Data Kota.xlsx');
 
-				include './assets/phpexcel/Classes/PHPExcel/IOFactory.php';
+      $this->load->helper('download');
+      force_download('./assets/excel/Data Kota.xlsx', NULL);
+      }
+     */
 
-				$inputFileName = './assets/excel/' .$data['file_name'];
-				$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
-				$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+    /*
+      public function import() {
+      $this->form_validation->set_rules('excel', 'File', 'trim|required');
 
-				$index = 0;
-				foreach ($sheetData as $key => $value) {
-					if ($key != 1) {
-						$check = $this->M_kota->check_nama($value['B']);
+      if ($_FILES['excel']['name'] == '') {
+      $this->session->set_flashdata('msg', 'File harus diisi');
+      } else {
+      $config['upload_path'] = './assets/excel/';
+      $config['allowed_types'] = 'xls|xlsx';
 
-						if ($check != 1) {
-							$resultData[$index]['nama'] = ucwords($value['B']);
-						}
-					}
-					$index++;
-				}
+      $this->load->library('upload', $config);
 
-				unlink('./assets/excel/' .$data['file_name']);
+      if ( ! $this->upload->do_upload('excel')){
+      $error = array('error' => $this->upload->display_errors());
+      }
+      else{
+      $data = $this->upload->data();
 
-				if (count($resultData) != 0) {
-					$result = $this->M_kota->insert_batch($resultData);
-					if ($result > 0) {
-						$this->session->set_flashdata('msg', show_succ_msg('Data Kota Berhasil diimport ke database'));
-						redirect('Kota');
-					}
-				} else {
-					$this->session->set_flashdata('msg', show_msg('Data Kota Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
-					redirect('Kota');
-				}
+      error_reporting(E_ALL);
+      date_default_timezone_set('Asia/Jakarta');
 
-			}
-		}
-	}
-	*/
+      include './assets/phpexcel/Classes/PHPExcel/IOFactory.php';
+
+      $inputFileName = './assets/excel/' .$data['file_name'];
+      $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+      $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+
+      $index = 0;
+      foreach ($sheetData as $key => $value) {
+      if ($key != 1) {
+      $check = $this->M_kota->check_nama($value['B']);
+
+      if ($check != 1) {
+      $resultData[$index]['nama'] = ucwords($value['B']);
+      }
+      }
+      $index++;
+      }
+
+      unlink('./assets/excel/' .$data['file_name']);
+
+      if (count($resultData) != 0) {
+      $result = $this->M_kota->insert_batch($resultData);
+      if ($result > 0) {
+      $this->session->set_flashdata('msg', show_succ_msg('Data Kota Berhasil diimport ke database'));
+      redirect('Kota');
+      }
+      } else {
+      $this->session->set_flashdata('msg', show_msg('Data Kota Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
+      redirect('Kota');
+      }
+
+      }
+      }
+      }
+     */
 }
 
 /* End of file Kota.php */

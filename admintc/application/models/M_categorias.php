@@ -22,7 +22,7 @@ class M_categorias extends CI_Model
         $data = $this->db->query($sql);
         return $data->result();
     }
-    
+
     public function getCategoriesByProductId($id)
     {
         $sql = "SELECT 
@@ -50,7 +50,7 @@ class M_categorias extends CI_Model
         $arrayAccesorios = $this->db->get()->result();
         return $arrayAccesorios;
     }
-    
+
     public function select_by_id($id)
     {
         $sql = "SELECT * FROM categoria WHERE cod_categoria = '{$id}'";
@@ -71,10 +71,9 @@ class M_categorias extends CI_Model
 
     public function insert($data)
     {
-        $sql = "INSERT INTO kota VALUES('','" . $data['kota'] . "')";
-
+        $sql = "INSERT INTO categoria (cod_tip_categoria, des_categoria, obs_categoria)
+                VALUES('" . $data['typeCategory'] . "','" . $data['name'] . "','" . $data['description'] . "')";
         $this->db->query($sql);
-
         return $this->db->affected_rows();
     }
 
@@ -87,7 +86,11 @@ class M_categorias extends CI_Model
 
     public function update($data)
     {
-        $sql = "UPDATE kota SET nama='" . $data['kota'] . "' WHERE id='" . $data['id'] . "'";
+        $sql = "UPDATE categoria SET "
+                . "cod_tip_categoria='" . $data['typeCategory'] . "', "
+                . "des_categoria='" . $data['name'] . "', "
+                . "obs_categoria='" . $data['description'] . "' "
+                . "WHERE cod_categoria='" . $data['id'] . "'";
 
         $this->db->query($sql);
 
@@ -96,7 +99,7 @@ class M_categorias extends CI_Model
 
     public function delete($id)
     {
-        $sql = "DELETE FROM kota WHERE id='" . $id . "'";
+        $sql = "DELETE FROM categoria WHERE cod_categoria='" . $id . "'";
 
         $this->db->query($sql);
 
