@@ -52,7 +52,7 @@
                                                                 </div>
                                                                 <?php } ?>
 
-                                                                <?php echo form_open('contacto'); ?>
+                                                                <?php echo form_open('index.php/contacto'); ?>
                                                                     <div style="display: none;">
                                                                         <input type="hidden" name="" value="" />
                                                                     </div>

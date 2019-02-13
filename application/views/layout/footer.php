@@ -25,18 +25,18 @@
                             <h3 class="widget-title">Categorias</h3>
                             <div class="menu-our-company-container">
                                 <ul id="menu-our-company" class="menu">
-                                    <li id="menu-item-1747" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1747"><a
-                                            href="#">Marca</a></li>
-                                    <li id="menu-item-1748" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1748"><a
-                                            href="#">Color</a></li>
-                                    <li id="menu-item-1749" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1749"><a
-                                            href="#">Estación</a></li>
-                                    <li id="menu-item-1750" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1750"><a
-                                            href="#">Disfraz</a></li>
-                                    <li id="menu-item-1751" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1751"><a
-                                            href="#">Material</a></li>
-                                    <li id="menu-item-1752" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1752"><a
-                                            href="#">Accesorios</a></li>
+                                    <li id="menu-item-1747" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1747">
+                                        <a href="/index.php/categoria/index/1">Marca</a></li>
+                                    <li id="menu-item-1748" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1748">
+                                        <a href="/index.php/categoria/index/2">Color</a></li>
+                                    <li id="menu-item-1749" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1749">
+                                        <a href="/index.php/categoria/index/3">Estación</a></li>
+                                    <li id="menu-item-1750" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1750">
+                                        <a href="/index.php/categoria/index/4">Disfraz</a></li>
+                                    <li id="menu-item-1751" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1751">
+                                        <a href="/index.php/categoria/index/5">Material</a></li>
+                                    <li id="menu-item-1752" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1752">
+                                        <a href="/index.php/categoria/index/6">Accesorios</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -49,19 +49,19 @@
                             <div class="menu-extra-navigation-container">
                                 <ul id="menu-extra-navigation" class="menu">
                                     <li id="menu-item-1753" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1753">
-                                        <a href="#">Inicio</a>
+                                        <a href="/">Inicio</a>
                                     </li>
                                     <li id="menu-item-1754" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1754">
-                                        <a href="#">Nosotros</a>
-                                    </li>
-                                    <li id="menu-item-1755" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1755">
-                                        <a href="#">Productos</a>
+                                        <a href="/index.php/nosotros">Nosotros</a>
                                     </li>
                                     <li id="menu-item-1756" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1756">
-                                        <a href="#">Novedades</a>
+                                        <a href="/index.php/novedades">Novedades</a>
+                                    </li>
+                                    <li id="menu-item-1755" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1755">
+                                        <a href="/index.php/ubicacion">Ubicación</a>
                                     </li>
                                     <li id="menu-item-1757" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1757">
-                                        <a href="#">Contacto</a>
+                                        <a href="/index.php/contacto">Contacto</a>
                                     </li>
                                 </ul>
                             </div>

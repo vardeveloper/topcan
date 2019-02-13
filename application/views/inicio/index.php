@@ -61,7 +61,7 @@
                                         <div class="col-xs-6 col-sm-4 product" itemscope="" itemtype="#">
                                             <div class="entry">
                                                 <figure class="entry-thumbnail">
-                                                    <a href="<?php echo base_url("detalle/index/$data->cod_producto"); ?>" title="">
+                                                    <a href="<?php echo base_url("index.php/detalle/index/$data->cod_producto"); ?>" title="">
                                                         <img src="<?php echo base_url(); ?><?= $data->img1_producto ?>" 
                                                              class="attachment-shop_catalog size-shop_catalog wp-post-image" 
                                                              alt="" 
@@ -72,12 +72,12 @@
                                                 </figure>
                                                 <div class="entry-body">
                                                     <h3 class="entry-title">
-                                                        <a href="<?php echo base_url("detalle/index/$data->cod_producto"); ?>" title="">
+                                                        <a href="<?php echo base_url("index.php/detalle/index/$data->cod_producto"); ?>" title="">
                                                             <?= $data->des_producto ?>
                                                         </a>
                                                     </h3>
                                                     <div class="buttons">
-                                                        <a rel="nofollow" href="<?php echo base_url("detalle/index/$data->cod_producto"); ?>" 
+                                                        <a rel="nofollow" href="<?php echo base_url("index.php/detalle/index/$data->cod_producto"); ?>" 
                                                            class="button product_type_simple add_to_cart_button ajax_add_to_cart">
                                                             Ver Detalle
                                                         </a>

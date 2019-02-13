@@ -67,7 +67,7 @@
                                     <a title="" href="/">Inicio</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a title="" href="/nosotros" class="">Nosotros</a>
+                                    <a title="" href="/index.php/nosotros" class="">Nosotros</a>
                                 </li>
                                 <li class="megamenu col-4 menu-item dropdown">
                                     <a title="" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">Productos <span class="caret"></span></a>
@@ -77,7 +77,7 @@
                                             <ul role="menu" class=" dropdown-menu">
                                                 <?php foreach ($arrayCategorias as $key => $asoc): ?>
                                                     <li class="menu-item">
-                                                        <a data-menu="<?= $asoc->cod_tip_categoria ?>" href="/categoria/index/<?= $asoc->cod_tip_categoria ?>">
+                                                        <a data-menu="<?= $asoc->cod_tip_categoria ?>" href="/index.php/categoria/index/<?= $asoc->cod_tip_categoria ?>">
                                                             <?= $asoc->des_tip_categoria ?>
                                                         </a>
                                                     </li>
@@ -89,13 +89,13 @@
                             </ul>
                             <ul id="menu-right-menu" class="nav navbar-nav main-menu-v2">
                                 <li class="menu-item">
-                                    <a title="" href="/novedades">Novedades </a>
+                                    <a title="" href="/index.php/novedades">Novedades </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a title="" href="/ubicacion">Ubicación</a>
+                                    <a title="" href="/index.php/ubicacion">Ubicación</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a title="" href="/contacto">Contacto</a>
+                                    <a title="" href="/index.php/contacto">Contacto</a>
                                 </li>
                             </ul>
                         </div>

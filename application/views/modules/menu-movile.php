@@ -3,7 +3,7 @@
         <a href="/">Inicio</a>
     </li>
     <li id="menu-item-2330" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2101">
-        <a href="/nosotros">Nosotros</a>
+        <a href="/index.php/nosotros">Nosotros</a>
     </li>
     <li id="menu-item-2102" class="megamenu col-4 menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current_page_ancestor menu-item-has-children menu-item-2102">
         <a href="#l">Productos</a>
@@ -11,7 +11,7 @@
 
             <?php foreach ($arrayCategorias as $key => $asoc): ?>
                 <li class="menu-item">
-                    <a data-menu="<?= $asoc->cod_tip_categoria ?>" href="/categoria/index/<?= $asoc->cod_tip_categoria ?>">
+                    <a data-menu="<?= $asoc->cod_tip_categoria ?>" href="/index.php/categoria/index/<?= $asoc->cod_tip_categoria ?>">
                         <?= $asoc->des_tip_categoria ?>
                     </a>
                 </li>
@@ -83,9 +83,9 @@
         </ul>
     </li>
     <li id="menu-item-2101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2101">
-        <a href="/ubicacion">Ubicación</a>
+        <a href="/index.php/ubicacion">Ubicación</a>
     </li>
     <li id="menu-item-2101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2101">
-        <a href="/contacto">Contacto</a>
+        <a href="/index.php/contacto">Contacto</a>
     </li>
 </ul>
