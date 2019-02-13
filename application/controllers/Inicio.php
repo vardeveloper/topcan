@@ -41,7 +41,7 @@ class Inicio extends CI_Controller
 
         if ($total_records > 0) {
 
-            $config['base_url'] = base_url() . 'inicio/index/';
+            $config['base_url'] = base_url() . 'index.php/inicio/index/';
             $config['total_rows'] = $total_records;
             $config['per_page'] = $per_page;
             $config['uri_segment'] = 3;
