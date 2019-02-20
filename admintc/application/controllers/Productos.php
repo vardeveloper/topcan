@@ -157,41 +157,42 @@ class Productos extends AUTH_Controller
         $this->form_validation->set_rules('detail', 'Detalle', 'trim|required');
 
         $data = $this->input->post();
+        
         if ($this->form_validation->run() == TRUE) {
-            
 
-            // Imagen
-            $valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp'); 
-            $path = ASSETS_PATH . '/img/galeria/'; // upload directory
+            $product = $this->M_productos->select_by_id($data['id']);
+            $data['img1'] = $product->img1_producto;
 
-            if ($_FILES['file']) {
-                
-                $product = $this->M_productos->select_by_id($data['id']);
-                $imagen_path = dirname(ASSETS_PATH) . '/' . $product->img1_producto;
-                
-                if (file_exists($imagen_path)) {
-                    unlink($imagen_path);
-                }
-                
+            //-------------------------- Imagen --------------------------------
+            if (!empty($_FILES['file']['tmp_name'])) {
+
                 $img = $_FILES['file']['name'];
                 $tmp = $_FILES['file']['tmp_name'];
 
                 // get uploaded file's extension
                 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+                $valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp');
 
-                // can upload same image using rand function
-                $final_image = rand(1000,1000000) . $img;
-                $filename = strtolower($final_image);
+                if (in_array($ext, $valid_extensions)) {
 
-                // check's valid format
-                if(in_array($ext, $valid_extensions)) 
-                {
-                    $path = $path . $filename; 
-                    move_uploaded_file($tmp,$path);
+                    $imagen_path = dirname(ASSETS_PATH) . '/' . $product->img1_producto;
+
+                    if (file_exists($imagen_path)) {
+                        unlink($imagen_path);
+                    }
+
+                    // can upload same image using rand function
+                    $final_image = rand(1000, 1000000) . $img;
+                    $filename = strtolower($final_image);
+
+                    $path = ASSETS_PATH . '/img/galeria/'; // upload directory
+                    $path = $path . $filename;
+                    move_uploaded_file($tmp, $path);
+
+                    $data['img1'] = "assets/img/galeria/$filename";
                 }
             }
-            
-            $data['img1'] = "assets/img/galeria/$filename";
+
             //------------------------------------------------------------------
             
             $result = $this->M_productos->update($data);
