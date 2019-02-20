@@ -62,11 +62,12 @@
                                                             <p><?= $asoc->det_producto ?></p>
                                                         </div>
                                                         <form class="cart" method="post" enctype='multipart/form-data'>
-                                                            <div class="quantity">
+                                                            <!--div class="quantity">
                                                                 <input type="text" id="" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" />
-                                                            </div>
+                                                            </div-->
                                                             <div class="buttons">
-                                                                <button type="submit" name="add-to-cart" value="2105" class="single_add_to_cart_button button">Cotizar</button>
+                                                                <!--button type="submit" name="add-to-cart" value="2105" class="single_add_to_cart_button button">Cotizar</button-->
+                                                                <a class="single_add_to_cart_button button" href="<?php echo base_url("index.php/contacto/index/$asoc->cod_producto") ?>">Cotizar</a>
                                                             </div>
                                                         </form>
                                                     </div>
