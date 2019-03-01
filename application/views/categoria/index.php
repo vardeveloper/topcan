@@ -30,8 +30,8 @@
 
                                                 <!--
                                                 <div id="woocommerce_product_search-2" class="widget woocommerce widget_product_search">
-                                                    <form action="" class="search-form"
-                                                          method="get" role="search">
+                                                    <form action="<?= base_url() ?>index.php/Categoria/loadRecord" class="search-form"
+                                                          method="post" role="search">
                                                         <label>
                                                             <span class="screen-reader-text">Buscar:</span>
                                                             <input type="search" id="woocommerce-product-search-field"
@@ -58,11 +58,11 @@
                                                     </ul>
                                                 </div>
                                                 <?php endforeach ?>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="col-md-9">
-                                            
+
                                             <!--
                                             <div class="count-order">
                                                 <p class="woocommerce-result-count">
@@ -85,26 +85,26 @@
                                             </div>
                                             -->
 
-                                            <?php foreach ($productos as $data): ?>
+                                            <?php foreach ($result as $data): ?>
 
                                                 <div class="col-xs-6 col-sm-4 product" itemscope="" itemtype="#">
                                                     <div class="entry" style="height: 420px">
                                                         <figure class="entry-thumbnail">
-                                                            <a href="<?php echo base_url("index.php/detalle/index/$data->cod_producto"); ?>" title="">
-                                                                <img src="<?php echo base_url(); ?><?= $data->img1_producto ?>" 
-                                                                     class="attachment-shop_catalog size-shop_catalog wp-post-image" 
-                                                                     alt="" 
+                                                            <a href="<?php echo base_url("index.php/detalle/index/" . $data['cod_producto']); ?>" title="">
+                                                                <img src="<?php echo base_url(); ?><?= $data['img1_producto'] ?>"
+                                                                     class="attachment-shop_catalog size-shop_catalog wp-post-image"
+                                                                     alt=""
                                                                      title="">
                                                             </a>
                                                         </figure>
                                                         <div class="entry-body">
                                                             <h3 class="entry-title">
-                                                                <a href="<?php echo base_url("index.php/detalle/index/$data->cod_producto"); ?>" title="">
-                                                                    <?= $data->des_producto ?>
+                                                                <a href="<?php echo base_url("index.php/detalle/index/" . $data['cod_producto']); ?>" title="">
+                                                                    <?= $data['des_producto'] ?>
                                                                 </a>
                                                             </h3>
                                                             <div class="buttons">
-                                                                <a rel="nofollow" href="<?php echo base_url("index.php/detalle/index/$data->cod_producto"); ?>" 
+                                                                <a rel="nofollow" href="<?php echo base_url("index.php/detalle/index/" . $data['cod_producto']); ?>"
                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart">
                                                                     Ver Detalle
                                                                 </a>
@@ -124,8 +124,10 @@
                                                     <a class="next page-numbers" href="#">Siguiente</a>
                                                 </nav>
                                             </div-->
-                                            
+
                                         </div>
+
+                                        <?= $pagination; ?>
 
                                         <!--
                                         <div>
@@ -134,15 +136,15 @@
                                             <?php } ?>
                                         </div>
                                         -->
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <br><br>
-                        
-                        
+
+
                     </div>
                 </div>
             </div>

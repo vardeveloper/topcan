@@ -33,17 +33,17 @@ class Contacto extends CI_Controller
 //        $phone = $this->input->post('phone');
 //        $subject = $this->input->post('subject');
 //        $message = $this->input->post('message');
-        
+
         if ($this->form_validation->run() == FALSE) {
-            
+
             $this->load->view('layout/layout', $data);
             
         } else {
 
             $this->enviar($_POST);
             $this->session->set_flashdata('send', TRUE);
-            redirect('contacto');
-            
+            redirect('index.php/contacto');
+
         }
 
     }
@@ -78,7 +78,7 @@ class Contacto extends CI_Controller
 //        $this->load->library('email', $config);
 //
 //        $msg = $this->load->view("email/contacto", $data, true);
-//        
+//
 //        //$this->email->set_newline("\r\n");
 //        $this->email->from('vardeveloper@gmail.com');
 //        $this->email->subject('Contacto');

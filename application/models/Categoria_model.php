@@ -111,4 +111,46 @@ class Categoria_Model extends CI_Model
         return $rows;
     }
 
+    // Fetch records
+    public function getData($rowno, $rowperpage, $search="")
+    {
+        $this->db->select('*');
+        $this->db->from('producto p')
+                  ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto')
+                  ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria')
+                  //->join('tipo_categoria tc', 'ca.cod_tip_categoria = tc.cod_tip_categoria')
+                  ->group_by('pc.cod_producto');
+
+        if ($search != '') {
+            $this->db->like('des_producto', $search);
+            $this->db->or_like('det_producto', $search);
+        }
+
+        $this->db->limit($rowperpage, $rowno);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    // Select total records
+    public function getrecordCount($search = '')
+    {
+        $this->db->select('count(*) as allcount');
+        $this->db->from('producto p')
+                  ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto')
+                  ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria')
+                  //->join('tipo_categoria tc', 'ca.cod_tip_categoria = tc.cod_tip_categoria')
+                  ->group_by('pc.cod_producto');
+
+        if ($search != '') {
+            $this->db->like('des_producto', $search);
+            $this->db->or_like('det_producto', $search);
+        }
+
+        $query = $this->db->get();
+        $result = $query->result_array();
+
+        return $result[0]['allcount'];
+    }
+
 }

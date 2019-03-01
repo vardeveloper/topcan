@@ -1,11 +1,11 @@
- 
+
 <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <?php include("application/views/modules/menu-movile.php"); ?>
     </div>
     <div id="wrap" class="">
         <header id="header" class="header style-v1">
-        
+
         <?php include("application/views/modules/main-menu.php"); ?>
 
         </header>
@@ -41,7 +41,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            
+
                                                 <div class="col-sm-7">
                                                     <div class="summary entry-summary">
                                                         <div class="summary-header">
@@ -67,6 +67,7 @@
                                                             </div>
                                                             <div class="buttons">
                                                                 <button type="submit" name="add-to-cart" value="2105" class="single_add_to_cart_button button">Cotizar</button>
+                                                                <a type="button" href="<?= $retornar ?>" class="single_add_to_cart_button button">Retornar</a>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -83,4 +84,3 @@
             </div>
         </div>
     </div>
-    
