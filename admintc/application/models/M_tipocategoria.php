@@ -73,8 +73,7 @@ class M_tipocategoria extends CI_Model
 
     public function total_rows()
     {
-        $data = $this->db->get('posisi');
-
+        $data = $this->db->get('tipo_categoria');
         return $data->num_rows();
     }
 

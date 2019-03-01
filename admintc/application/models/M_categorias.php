@@ -116,8 +116,7 @@ class M_categorias extends CI_Model
 
     public function total_rows()
     {
-        $data = $this->db->get('kota');
-
+        $data = $this->db->get('categoria');
         return $data->num_rows();
     }
 

@@ -105,7 +105,7 @@
                                                                                         type="text" 
                                                                                         name="subject"
                                                                                         id="subject" 
-                                                                                        value="<?php echo set_value('subject'); ?>" 
+                                                                                        value="<?php echo !empty($this->session->flashdata('subject')) ? $this->session->flashdata('subject') : set_value('subject'); ?>" 
                                                                                         size="40" 
                                                                                         class=""
                                                                                         required="true"

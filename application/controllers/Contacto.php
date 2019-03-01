@@ -8,7 +8,8 @@ class Contacto extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('categoria_model');
+        $this->load->model('Categoria_model');
+        $this->load->model('Detalle_model');
         $this->load->helper(array('form', 'url', 'security'));
         $this->load->library(array('session', 'form_validation', 'Mailer'));
     }
@@ -18,8 +19,20 @@ class Contacto extends CI_Controller
         $data['titulo'] = 'Contacto';
         $data['pagina'] = 'contacto/index';
 
-        $arrayCategorias = $this->categoria_model->getAll();
+        $arrayCategorias = $this->Categoria_model->getAll();
         $data['arrayCategorias'] = $arrayCategorias;
+
+        $this->session->set_flashdata('subject', false);
+        
+        // subject
+        $id = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        if (!empty($id)) {
+            $object = $this->Detalle_model->getProductoId($id);
+            $producto = json_decode(json_encode($object), True);
+            if (!empty($producto)) {
+                $this->session->set_flashdata('subject', 'Cotizar - ' . $producto[0]['des_producto']);
+            }
+        }
 
         // form contact
         $this->form_validation->set_rules('name', 'Nombre Completo', 'trim|required|xss_clean|callback_alpha_space_only');
@@ -45,7 +58,7 @@ class Contacto extends CI_Controller
             redirect('index.php/contacto');
 
         }
-
+        
     }
 
     public function enviar($data)
