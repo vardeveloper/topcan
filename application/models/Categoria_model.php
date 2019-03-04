@@ -104,7 +104,7 @@ class Categoria_Model extends CI_Model
             $this->db->where('ca.cod_categoria', $where['categoryId']);
         }
 
-        $rows = $this->db->get()->result();
+        $rows = $this->db->get()->result_array();
 
         //echo $sql = $this->db->last_query();
 

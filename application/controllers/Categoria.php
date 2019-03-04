@@ -19,7 +19,7 @@ class Categoria extends CI_Controller
 
     public function index($id)
     {
-        redirect('index.php/Categoria/loadRecord');
+        //redirect('index.php/Categoria/loadRecord');
 
         $data['titulo'] = 'Categorias';
         $data['pagina'] = 'categoria/index';
@@ -131,17 +131,17 @@ class Categoria extends CI_Controller
 
         // Search text
         $search_text = "";
-        if ($this->input->post('submit') != NULL) {
+        if ($this->input->post('search') != NULL) {
             $search_text = $this->input->post('search');
             $this->session->set_userdata(array("search" => $search_text));
-        } else {
-            if ($this->session->userdata('search') != NULL) {
-                $search_text = $this->session->userdata('search');
-            }
+        //} else {
+            //if ($this->session->userdata('search') != NULL) {
+                //$search_text = $this->session->userdata('search');
+            //}
         }
 
         // Row per page
-        $rowperpage = 5;
+        $rowperpage = 3;
 
         // Row position
         if ($rowno != 0) {
@@ -159,6 +159,34 @@ class Categoria extends CI_Controller
         $config['use_page_numbers'] = TRUE;
         $config['total_rows'] = $allcount;
         $config['per_page'] = $rowperpage;
+
+        //  start optional
+        // styling/html stuff
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        // primero
+        $config['first_link'] = '&laquo; Primero';
+        $config['first_tag_open'] = '<li class="prev page">';
+        $config['first_tag_close'] = '</li>' . "\n";
+        // ultimo
+        $config['last_link'] = 'Último &raquo;';
+        $config['last_tag_open'] = '<li class="next page">';
+        $config['last_tag_close'] = '</li>' . "\n";
+        // siguiente
+        $config['next_link'] = 'Siguiente &rarr;';
+        $config['next_tag_open'] = '<li class="next page">';
+        $config['next_tag_close'] = '</li>' . "\n";
+        // anterior
+        $config['prev_link'] = '&larr; Anterior';
+        $config['prev_tag_open'] = '<li class="prev page">';
+        $config['prev_tag_close'] = '</li>' . "\n";
+        // activo
+        $config['cur_tag_open'] = '<li class="active"><a href="">';
+        $config['cur_tag_close'] = '</a></li>';
+        // page
+        $config['num_tag_open'] = '<li class="page">';
+        $config['num_tag_close'] = '</li>' . "\n";
+        //  end optional
 
         // Initialize
         $this->pagination->initialize($config);

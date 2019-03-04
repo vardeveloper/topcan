@@ -28,21 +28,19 @@
                                         <div class="col-md-3">
                                             <div class="sidebar-page sidebar">
 
-                                                <!--
+
                                                 <div id="woocommerce_product_search-2" class="widget woocommerce widget_product_search">
                                                     <form action="<?= base_url() ?>index.php/Categoria/loadRecord" class="search-form"
                                                           method="post" role="search">
                                                         <label>
                                                             <span class="screen-reader-text">Buscar:</span>
-                                                            <input type="search" id="woocommerce-product-search-field"
-                                                                   name="s" value="" placeholder="Buscar"
+                                                            <input type="text" name="search" placeholder="Buscar"
                                                                    class="search-field">
                                                         </label>
                                                         <button class="search-submit" type="submit"><span class="fa fa-search"></span></button>
-                                                        <input type="hidden" name="post_type" value="product" />
                                                     </form>
                                                 </div>
-                                                -->
+
 
                                                 <?php foreach ($treeOfCategories as $key => $value): ?>
                                                 <div class="widget woocommerce">
