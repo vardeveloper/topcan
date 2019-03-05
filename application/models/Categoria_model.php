@@ -87,39 +87,61 @@ class Categoria_Model extends CI_Model
         return $rows;
     }
 
-    public function getProductosByTipoCategoria($where = null)
+    public function getProductosByTipoCategoria($rowno, $rowperpage, $where = null)
     {
-        $this->db->select('*')
+        $this->db->select('distinct(p.cod_producto), p.*')
                 ->from('producto p')
                 ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto')
-                ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria')
+                ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria');
                 //->join('tipo_categoria tc', 'ca.cod_tip_categoria = tc.cod_tip_categoria')
-                ->group_by('pc.cod_producto');
+                //->group_by('pc.cod_producto'); // cambiado por el distinct
 
-        if (isset($where['typeCategoryId']) && $where['typeCategoryId'] > 0) {
+        if (!empty($where['typeCategoryId'])) {
             $this->db->where('ca.cod_tip_categoria', $where['typeCategoryId']);
         }
 
-        if (isset($where['categoryId']) && $where['categoryId'] > 0) {
+        if (!empty($where['categoryId'])) {
             $this->db->where('ca.cod_categoria', $where['categoryId']);
         }
 
+        $this->db->limit($rowperpage, $rowno);
         $rows = $this->db->get()->result_array();
-
         //echo $sql = $this->db->last_query();
 
         return $rows;
     }
 
+    // get total categorias
+    public function getTotalProducts($where = null)
+    {
+        $this->db->select('distinct(p.cod_producto)');
+        $this->db->from('producto p')
+                  ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto')
+                  ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria');
+                  //->join('tipo_categoria tc', 'ca.cod_tip_categoria = tc.cod_tip_categoria')
+
+        if (!empty($where['typeCategoryId'])) {
+            $this->db->where('ca.cod_tip_categoria', $where['typeCategoryId']);
+        }
+
+        if (!empty($where['categoryId'])) {
+            $this->db->where('ca.cod_categoria', $where['categoryId']);
+        }
+
+        $query = $this->db->get();
+        $result = $query->result_array();
+        //echo $sql = $this->db->last_query();
+
+        return count($result);
+    }
+
     // Fetch records
     public function getData($rowno, $rowperpage, $search="")
     {
-        $this->db->select('*');
+        $this->db->select('distinct(p.cod_producto), p.*');
         $this->db->from('producto p')
                   ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto')
-                  ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria')
-                  //->join('tipo_categoria tc', 'ca.cod_tip_categoria = tc.cod_tip_categoria')
-                  ->group_by('pc.cod_producto');
+                  ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria');
 
         if ($search != '') {
             $this->db->like('des_producto', $search);
@@ -135,12 +157,11 @@ class Categoria_Model extends CI_Model
     // Select total records
     public function getrecordCount($search = '')
     {
-        $this->db->select('count(*) as allcount');
+        $this->db->select('distinct(p.cod_producto)');
         $this->db->from('producto p')
                   ->join('producto_categoria pc', 'p.cod_producto = pc.cod_producto')
-                  ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria')
-                  //->join('tipo_categoria tc', 'ca.cod_tip_categoria = tc.cod_tip_categoria')
-                  ->group_by('pc.cod_producto');
+                  ->join('categoria ca', 'pc.cod_categoria = ca.cod_categoria');
+
 
         if ($search != '') {
             $this->db->like('des_producto', $search);
@@ -150,7 +171,7 @@ class Categoria_Model extends CI_Model
         $query = $this->db->get();
         $result = $query->result_array();
 
-        return $result[0]['allcount'];
+        return count($result);
     }
 
 }

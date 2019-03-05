@@ -17,9 +17,10 @@ class Categoria extends CI_Controller
         $this->load->model('categoria_model');
     }
 
-    public function index($id)
+    public function index()
     {
-        //redirect('index.php/Categoria/loadRecord');
+        // redirect('index.php/Categoria/loadRecord');
+        // http://127.0.0.1:8080/index.php/categoria/index/1/sub/1
 
         $data['titulo'] = 'Categorias';
         $data['pagina'] = 'categoria/index';
@@ -32,19 +33,74 @@ class Categoria extends CI_Controller
         $data['treeOfCategories'] = $treeOfCategories;
 
         // Listado de productos
-        $productos = $this->categoria_model->getProductosByTipoCategoria();
-        if (!empty($id)) {
-            $categoryId = $this->uri->segment(5);
+        $rowno = ($this->uri->segment(6)) ? $this->uri->segment(6) : 0;
+        $typeCategoryId = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $categoryId = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
 
-            $where = array(
-                'typeCategoryId' => $id,
-                'categoryId' => !empty($categoryId) ? $categoryId : 0,
-            );
+        $where = array(
+            'typeCategoryId' => $typeCategoryId,
+            'categoryId' => $categoryId,
+        );
 
-            $productos = $this->categoria_model->getProductosByTipoCategoria($where);
-            //redirect(base_url('categoria'), 'refresh');
+        // Row per page
+        $rowperpage = 9;
+
+        // Row position
+        if ($rowno != 0) {
+            $rowno = ($rowno - 1) * $rowperpage;
         }
-        $data['result'] = $productos;
+
+        // All records count
+        $allcount = $this->categoria_model->getTotalProducts($where);
+        //print_r($allcount);
+        //die;
+
+        // Get records
+        $users_record = $this->categoria_model->getProductosByTipoCategoria($rowno, $rowperpage, $where);
+        //print_r($users_record);
+
+        // Pagination Configuration
+        $config['base_url'] = base_url() . "index.php/categoria/index/$typeCategoryId/sub/$categoryId";
+        $config['use_page_numbers'] = TRUE;
+        $config['total_rows'] = $allcount;
+        $config['per_page'] = $rowperpage;
+
+        //  start optional
+        // styling/html stuff
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        // primero
+        $config['first_link'] = '&laquo; Primero';
+        $config['first_tag_open'] = '<li class="prev page">';
+        $config['first_tag_close'] = '</li>' . "\n";
+        // ultimo
+        $config['last_link'] = 'Último &raquo;';
+        $config['last_tag_open'] = '<li class="next page">';
+        $config['last_tag_close'] = '</li>' . "\n";
+        // siguiente
+        $config['next_link'] = 'Siguiente &rarr;';
+        $config['next_tag_open'] = '<li class="next page">';
+        $config['next_tag_close'] = '</li>' . "\n";
+        // anterior
+        $config['prev_link'] = '&larr; Anterior';
+        $config['prev_tag_open'] = '<li class="prev page">';
+        $config['prev_tag_close'] = '</li>' . "\n";
+        // activo
+        $config['cur_tag_open'] = '<li class="active"><a href="">';
+        $config['cur_tag_close'] = '</a></li>';
+        // page
+        $config['num_tag_open'] = '<li class="page">';
+        $config['num_tag_close'] = '</li>' . "\n";
+        //  end optional
+
+        // Initialize
+        $this->pagination->initialize($config);
+
+        $data['pagination'] = $this->pagination->create_links();
+        $data['result'] = $users_record; // products
+        $data['row'] = $rowno;
+
+        //redirect(base_url('categoria'), 'refresh');
 
         $this->load->view('layout/layout', $data);
     }
@@ -141,7 +197,7 @@ class Categoria extends CI_Controller
         }
 
         // Row per page
-        $rowperpage = 3;
+        $rowperpage = 9;
 
         // Row position
         if ($rowno != 0) {

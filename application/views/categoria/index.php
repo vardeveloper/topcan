@@ -44,7 +44,7 @@
 
                                                 <?php foreach ($treeOfCategories as $key => $value): ?>
                                                 <div class="widget woocommerce">
-                                                    <a href="<?php echo base_url("index.php/categoria/index/$key"); ?>">
+                                                    <a href="<?php echo base_url("index.php/categoria/index/$key/sub/0"); ?>">
                                                         <h3 class="widget-title"><?= $value['name'] ?></h3>
                                                     </a>
                                                     <ul class="product-categories">
@@ -125,15 +125,9 @@
 
                                         </div>
 
-                                        <?= $pagination; ?>
-
-                                        <!--
-                                        <div>
-                                            <?php if (isset($links)) { ?>
-                                                <?php echo $links ?>
-                                            <?php } ?>
+                                        <div class="row-fluid">
+                                            <?= $pagination; ?>
                                         </div>
-                                        -->
 
                                     </div>
                                 </div>
