@@ -116,13 +116,13 @@ class Contacto extends CI_Controller
         $this->load->library('email');
         $this->email->initialize($config);
 
-        $email = "vardeveloper@gmail.com";
+        $email = "vavilatu@vavila.tudominio.pro";
         $subject = "Contacto";
 
         $msg = $this->load->view("email/contacto", $data, true);
 
         $this->email
-                ->from('vardeveloper@gmail.com')
+                ->from('vavilatu@vavila.tudominio.pro')
                 ->to($email)
                 ->subject($subject)
                 ->message($msg)

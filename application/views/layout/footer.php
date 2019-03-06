@@ -2,7 +2,7 @@
     <div class="footer-info">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-md-5">
+                <div class="col-sm-6 col-md-4">
                     <div class="sidebar-inner">
                         <div id="widget-about-info-2" class="widget about-info">
                             <h3 class="widget-title">Nosotros</h3>
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-2">
+                <div class="col-sm-6 col-md-3">
                     <div class="sidebar-inner">
                         <div id="nav_menu-22" class="widget widget_nav_menu">
                             <h3 class="widget-title">Categorias</h3>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-2">
+                <div class="col-sm-6 col-md-3">
                     <div class="sidebar-inner">
                         <div id="nav_menu-23" class="widget widget_nav_menu">
                             <h3 class="widget-title">Páginas</h3>
@@ -68,10 +68,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-2">
                     <div class="sidebar-inner">
-                        <div id="text-4" class="widget widget_text">
-                            <div class="textwidget">Síguenos en Facebook</div>
+                        <div id="" class="widget footer-social">
+                            <h3 class="widget-title">Síguenos</h3>
+                            <a href="https://m.facebook.com/760664550954452" title="Follow us via Facebook" rel="nofollow" target="_blank">
+                                <span class="fa fa-facebook"></span>
+                            </a>
                         </div>
                     </div>
                 </div>

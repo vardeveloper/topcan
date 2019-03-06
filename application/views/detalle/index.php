@@ -61,13 +61,14 @@
                                                         <div itemprop="description" class="description">
                                                             <p><?= $asoc->det_producto ?></p>
                                                         </div>
-                                                        <form class="cart" method="post" enctype='multipart/form-data'>
+                                                        <form class="cart" method="post">
                                                             <!--div class="quantity">
                                                                 <input type="text" id="" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" />
                                                             </div-->
                                                             <div class="buttons">
-                                                                <button type="submit" name="add-to-cart" value="2105" class="single_add_to_cart_button button">Cotizar</button>
-                                                                <a type="button" href="<?= $retornar ?>" class="single_add_to_cart_button button">Retornar</a>
+                                                                <!--button type="submit" name="add-to-cart" value="2105" class="single_add_to_cart_button button">Cotizar</button-->
+                                                                <a class="single_add_to_cart_button button" href="<?= base_url("index.php/contacto/index/$asoc->cod_producto") ?>">Cotizar</a>
+                                                                <a class="single_add_to_cart_button button" href="<?= $retornar ?>">Retornar</a>
                                                             </div>
                                                         </form>
                                                     </div>
