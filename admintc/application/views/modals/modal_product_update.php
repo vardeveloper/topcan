@@ -23,7 +23,21 @@
             <span class="input-group-addon">
                 <i class="glyphicon glyphicon-picture"></i>
             </span>
-            <input type="file" id="file" name="file" />
+            <input type="file" name="file" />
+        </div>
+        
+        <div class="input-group form-group">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-picture"></i>
+            </span>
+            <input type="file" name="photo2" />
+        </div>
+        
+        <div class="input-group form-group">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-picture"></i>
+            </span>
+            <input type="file" name="photo3" />
         </div>
 
         <div class="form-group">

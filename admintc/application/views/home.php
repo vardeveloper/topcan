@@ -78,7 +78,7 @@
     // //datos profesión
     // var pieChartCanvas = $("#data-posisi").get(0).getContext("2d");
     // var pieChart = new Chart(pieChartCanvas);
-    // var PieData = <?php echo $data_posisi; ?>;
+    // var PieData = <?php //echo $data_posisi; ?>;
 
     // var pieOptions = {
     //   segmentShowStroke: true,
@@ -99,7 +99,7 @@
     // //datos de ciudad
     // var pieChartCanvas = $("#data-kota").get(0).getContext("2d");
     // var pieChart = new Chart(pieChartCanvas);
-    // var PieData = <?php echo $data_kota; ?>;
+    // var PieData = <?php //echo $data_kota; ?>;
 
     // var pieOptions = {
     //   segmentShowStroke: true,

@@ -34,10 +34,12 @@ class M_productos extends CI_Model
     public function update($data)
     {
         $sql = "UPDATE producto SET "
-                . "des_producto='" . $data['description'] . "', "
-                . "det_producto='" . $data['detail'] . "', "
-                . "img1_producto='" . $data['img1'] . "' "
-                . "WHERE cod_producto=" . $data['id'];
+                . "des_producto = '" . $data['description'] . "', "
+                . "det_producto = '" . $data['detail'] . "', "
+                . "img1_producto = '" . $data['img1'] . "', "
+                . "img2_producto = '" . $data['img2'] . "', "
+                . "img3_producto = '" . $data['img3'] . "' "
+                . "WHERE cod_producto = " . $data['id'];
         $this->db->query($sql);
         return $this->db->affected_rows();
     }
@@ -69,7 +71,7 @@ class M_productos extends CI_Model
     public function insert($data)
     {
         $sql = "INSERT INTO producto (des_producto, img1_producto, img2_producto, img3_producto, det_producto)
-                VALUES ('$data[description]', '$data[img1]', 'img2', 'img3', '$data[detail]');";
+                VALUES ('$data[description]', '$data[img1]', '$data[img2]', '$data[img3]', '$data[detail]');";
         $this->db->query($sql);
         return $this->db->affected_rows();
     }
