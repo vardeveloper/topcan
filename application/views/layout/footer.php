@@ -93,9 +93,23 @@
 <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
 <script src="<?php echo base_url(); ?>assets/js/map.js"></script>
 
+<!-- Start Slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.js"></script>
 <script>
-    //$('.alert').alert('open');
+var slider = tns({
+    "container": "#customize",
+    "items": 1,
+    "controlsContainer": "#customize-controls",
+    "navContainer": "#customize-thumbnails",
+    "navAsThumbnails": true,
+    "autoplay": true,
+    "autoplayTimeout": 6000,
+    "autoplayButton": "#customize-toggle",
+    "swipeAngle": false,
+    "speed": 3000
+});
 </script>
+<!-- End Slider -->
 
 </body>
 </html>

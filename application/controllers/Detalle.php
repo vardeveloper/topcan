@@ -19,7 +19,7 @@ class Detalle extends CI_Controller
 
         $arrayCategorias = $this->categoria_model->getAll();
         $data['arrayCategorias'] = $arrayCategorias;
-        $data['retornar'] = $_SERVER['HTTP_REFERER'];
+        $data['retornar'] = @$_SERVER['HTTP_REFERER'];
 
         $productoDetalle = $this->detalle_model->getProductoId($productoId);
 

@@ -21,13 +21,71 @@
 
                                             <?php foreach ($productoDetalle as $key => $asoc): ?>
 
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-6">
                                                     <div class="images">
                                                         <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images"
                                                             data-columns="4">
-                                                            <figure class="woocommerce-product-gallery__wrapper">
+                                                            
+                                                            <!-- Start Slider -->
+                                                            <div id="customize_wrapper">
+                                                                <div class="customize" id="customize">
+                                                                    <div>
+                                                                        <div>
+                                                                            <img src="<?php echo base_url(); ?><?= $asoc->img1_producto ?>" alt="" style="max-height:400px">
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php if (!empty($asoc->img2_producto) && $asoc->img2_producto != "assets/img/galeria/default.png") { ?>
+                                                                    <div>
+                                                                        <div>
+                                                                            <img src="<?php echo base_url(); ?><?= $asoc->img2_producto ?>" alt="" style="max-height:400px" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php } ?>
+                                                                    <?php if (!empty($asoc->img3_producto) && $asoc->img3_producto != "assets/img/galeria/default.png") { ?>
+                                                                    <div>
+                                                                        <div>
+                                                                            <img src="<?php echo base_url(); ?><?= $asoc->img3_producto ?>" alt="" style="max-height:400px">
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php } ?>
+                                                                </div>
+                                                                <div class="customize-tools">
+                                                                    <ul class="thumbnails" id="customize-thumbnails">
+                                                                        <li>
+                                                                            <img src="<?php echo base_url(); ?><?= $asoc->img1_producto ?>" alt="" width="50" height="33">
+                                                                        </li>
+                                                                        <?php if (!empty($asoc->img2_producto) && $asoc->img2_producto != "assets/img/galeria/default.png") { ?>
+                                                                        <li>
+                                                                            <img src="<?php echo base_url(); ?><?= $asoc->img2_producto ?>" alt="" width="50" height="33">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if (!empty($asoc->img3_producto) && $asoc->img3_producto != "assets/img/galeria/default.png") { ?>
+                                                                        <li>
+                                                                            <img src="<?php echo base_url(); ?><?= $asoc->img3_producto ?>" alt="" width="50" height="33">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                    </ul>
+                                                                    <ul class="controls" id="customize-controls">
+                                                                        <li class="prev">
+                                                                            <img src="<?= base_url() ?>assets/img/angle-left.png" alt="">
+                                                                        </li>
+                                                                        <li class="next">
+                                                                            <img src="<?= base_url() ?>assets/img/angle-right.png" alt="">
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div class="playbutton-wrapper">
+                                                                        <button id="customize-toggle">Pause</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- End Slider -->
+                                                                
+                                                            
+                                                            <!--figure class="woocommerce-product-gallery__wrapper">
                                                                 <div data-thumb="<?php echo base_url(); ?><?= $asoc->img1_producto ?>"
-                                                                    class="woocommerce-product-gallery__image"><a href="<?php echo base_url(); ?><?= $asoc->img1_producto ?>"><img
+                                                                    class="woocommerce-product-gallery__image">
+                                                                    <a href="<?php echo base_url(); ?><?= $asoc->img1_producto ?>">
+                                                                        <img
                                                                         width="458" height="505" src="<?php echo base_url(); ?><?= $asoc->img1_producto ?>"
                                                                         class="attachment-shop_single size-shop_single"
                                                                         alt="" title="imge_27-min" data-caption=""
@@ -35,14 +93,16 @@
                                                                         data-large_image="<?php echo base_url(); ?><?= $asoc->img1_producto ?>"
                                                                         data-large_image_width="458"
                                                                         data-large_image_height="505" srcset="<?php echo base_url(); ?><?= $asoc->img1_producto ?>"
-                                                                        sizes="(max-width: 458px) 100vw, 458px" /></a>
+                                                                        sizes="(max-width: 458px) 100vw, 458px" />
+                                                                    </a>
                                                                 </div>
-                                                            </figure>
+                                                            </figure-->
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-6">
                                                     <div class="summary entry-summary">
                                                         <div class="summary-header">
                                                             <!-- <div class="tags"><a href="../../product-tag/kreme-chicken-dry/index.html"

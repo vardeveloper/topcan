@@ -3,6 +3,9 @@
     <head>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/cache/minify/2/40b1d.css" media="all" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/cache/minify/2/a1052.css" media="all" />
+        <!-- Start Slider -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/tiny-slider.css">
+        <!-- End Slider -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <script type="text/javascript">
@@ -78,6 +81,46 @@
                 background-image: url(<?php echo base_url(); ?>assets/img/slide-3-min.jpg) !important
             }
         </style>
+        <!-- Start Slider -->
+        <style>
+            .customize-tools { position: relative; }
+            .thumbnails { 
+              margin: 20px 0;
+              text-align: center;
+            }
+            .thumbnails li {
+              display: inline-block;
+              cursor: pointer;
+              border: 5px solid #fff;
+            }
+            .thumbnails .tns-nav-active {
+              background: none;
+              border-color: #000;
+            }
+            .thumbnails li { width: 50px; }
+            .thumbnails img { vertical-align: bottom; height: auto; max-height: 50px; }
+            .controls { text-align: center; }
+            .controls li {
+              display: block;
+              position: absolute;
+              top: 50%;
+              height: 60px;
+              line-height: 60px;
+              margin-top: -30px;
+              padding: 0 15px;
+              cursor: pointer;
+              transition: background 0.3s;
+            }
+            .controls li img { display: inline-block; vertical-align: middle; }
+            .controls .prev { left: 0; }
+            .controls .next { right: 0; }
+            .controls li:hover { background: #f2f2f2; }
+            
+            .playbutton-wrapper { text-align: center; }
+            .playbutton-wrapper button { height: 34px; padding: 0 10px; font-size: 14px; background: #fff; border-radius: 3px; border: 1px solid  #ccc; cursor: pointer; }
+
+        </style>
+        <!-- End Slider -->
         
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
     </head>
